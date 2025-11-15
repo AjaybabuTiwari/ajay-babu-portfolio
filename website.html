@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajay Babu | Data & Business Analyst</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0f172a;
+            --accent: #06b6d4;
+            --text: #334155;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-gray: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease 0.6s backwards;
+        }
+        
+        .btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--secondary);
+        }
+        
+        /* Contact Info Bar */
+        .contact-bar {
+            background: var(--bg-gray);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text);
+        }
+        
+        .contact-item svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary);
+        }
+        
+        /* Section Styles */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+        
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .skill-tag {
+            background: var(--bg-gray);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text);
+            border: 1px solid #e2e8f0;
+        }
+        
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+        }
+        
+        .experience-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+        
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--bg-gray);
+        }
+        
+        .experience-header {
+            margin-bottom: 1rem;
+        }
+        
+        .experience-title {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .experience-company {
+            color: var(--primary);
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+        
+        .experience-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        
+        .experience-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .experience-item li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .experience-item li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .project-card-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            padding: 2rem;
+            color: white;
+        }
+        
+        .project-card-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-card-body {
+            padding: 1.5rem;
+        }
+        
+        .project-card-body p {
+            color: var(--text);
+            line-height: 1.7;
+        }
+        
+        /* Achievements Section */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .achievement-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: transform 0.3s;
+        }
+        
+        .achievement-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .achievement-card h3 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .achievement-card p {
+            color: var(--text-light);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .contact-bar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">AB</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Ajay Babu</h1>
+            <div class="subtitle">Data & Business Analyst</div>
+            <p>Experienced professional with 6+ years of expertise in transforming complex data into actionable insights. Specialized in building scalable analytics solutions, automating workflows, and driving data-informed decision-making across diverse industries.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="#projects" class="btn btn-outline">View Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Bar -->
+    <div class="contact-bar">
+        <div class="contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <span>btajay9670@gmail.com</span>
+        </div>
+        <div class="contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            <span>+91-8800985719</span>
+        </div>
+        <div class="contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            <span>linkedin.com/in/ajay-babu-7a58a6137</span>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; line-height: 1.8; color: var(--text);">
+            <p style="margin-bottom: 1.5rem;">
+                I'm a seasoned Data & Business Analyst with over 6 years of proven expertise in leveraging analytics to drive strategic business outcomes. With deep knowledge in Python, SQL, Power BI, and cloud technologies, I specialize in building end-to-end data solutions that transform raw data into meaningful insights.
+            </p>
+            <p>
+                Throughout my career, I've led cross-functional teams, automated complex workflows, and developed enterprise-grade dashboards that have significantly improved operational efficiency and decision-making processes. I'm passionate about using data to solve real-world business challenges and creating scalable solutions that deliver measurable impact.
+            </p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" style="background: var(--bg-gray);">
+        <h2 class="section-title">Technical Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Programming & Databases</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">VBA</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Cloud & Big Data</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">AWS (EC2, S3)</span>
+                    <span class="skill-tag">Google Cloud</span>
+                    <span class="skill-tag">Snowflake</span>
+                    <span class="skill-tag">Hadoop</span>
+                    <span class="skill-tag">Spark</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Visualization & BI</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">Tableau</span>
+                    <span class="skill-tag">Advanced Excel</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Core Competencies</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Data Analytics</span>
+                    <span class="skill-tag">ETL Pipelines</span>
+                    <span class="skill-tag">Business Intelligence</span>
+                    <span class="skill-tag">Process Automation</span>
+                    <span class="skill-tag">KPI Development</span>
+                    <span class="skill-tag">Data Storytelling</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="experience-timeline">
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="experience-title">Assistant Manager, Data Analytics</div>
+                    <div class="experience-company">International Asset Reconstruction Company</div>
+                    <div class="experience-date">Jun 2023 – Present</div>
+                </div>
+                <ul>
+                    <li>Leading a team of 4+ analysts to deliver enterprise dashboards for C-suite reporting</li>
+                    <li>Designed Power BI dashboards to track investor KPIs, reducing reporting cycles by 40%</li>
+                    <li>Automated ETL workflows using Python and SQL, enhancing data preparation efficiency by 45%</li>
+                    <li>Directed data-driven marketing and collections campaigns, increasing recovery rates by 30%</li>
+                    <li>Rolled out an AI-enabled WhatsApp chatbot for loan inquiries, automating over 60% of customer queries and improving support efficiency across a ₹5,000 crore loan portfolio</li>
+                    <li>Conveyed strategic KPIs and insights to the board and investors, enabling resolution of 99% of business challenges</li>
+                    <li>Spearheaded an end-to-end Python–Power BI reporting stack, reducing monthly reporting time by 50%</li>
+                    <li>Automated extraction of 500,000+ documents per month through custom scripts</li>
+                    <li>Integrated MongoDB with BI platforms, accelerating query response by 75%</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="experience-title">Business & Data Analyst</div>
+                    <div class="experience-company">Nysaa Retail Pvt Ltd</div>
+                    <div class="experience-date">Aug 2022 – Jun 2023</div>
+                </div>
+                <ul>
+                    <li>Automated Excel-based reporting with Python, reducing manual effort by 50%</li>
+                    <li>Produced performance dashboards on product lifecycle and sales funnel analysis, improving stakeholder decision-making speed by 25% and increasing reporting adoption across 3 business units</li>
+                    <li>Optimized data transformation pipelines, improving processing speed by 20%</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="experience-title">Data Analyst</div>
+                    <div class="experience-company">Krishi Acharya Technologies (Bijak)</div>
+                    <div class="experience-date">Jan 2021 – Jul 2022</div>
+                </div>
+                <ul>
+                    <li>Executed data-driven campaigns that increased customer inquiries by 30% and market share by 20%</li>
+                    <li>Boosted ERP adoption by 40% through behavioural data analysis and actionable insights</li>
+                    <li>Delivered product insights that improved system performance by 20%</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="experience-title">Data Analyst</div>
+                    <div class="experience-company">Suri Agro Fresh Pvt Ltd</div>
+                    <div class="experience-date">Aug 2019 – Jan 2021</div>
+                </div>
+                <ul>
+                    <li>Led data initiatives in demand forecasting and vendor performance tracking, cutting manual effort by 80%</li>
+                    <li>Implemented Amazon Vendor Central analytics to monitor P&L, raising profitability by 20%</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" style="background: var(--bg-gray);">
+        <h2 class="section-title">Key Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-card-header">
+                    <h3>AI WhatsApp Chatbot</h3>
+                </div>
+                <div class="project-card-body">
+                    <p>Built and deployed an automated loan query system using WhatsApp API, enabling real-time customer support and significantly improving response rates and customer satisfaction.</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-card-header">
+                    <h3>Power BI + SQL Dashboards</h3>
+                </div>
+                <div class="project-card-body">
+                    <p>Developed real-time dashboards to track collections and agent productivity, providing actionable insights that improved operational efficiency across the organization.</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-card-header">
+                    <h3>Marketing & Collections Strategy</h3>
+                </div>
+                <div class="project-card-body">
+                    <p>Designed and executed data-driven recovery campaigns, leveraging analytics to optimize targeting and messaging, resulting in a 30% increase in recovery rates.</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-card-header">
+                    <h3>Investor Dashboard</h3>
+                </div>
+                <div class="project-card-body">
+                    <p>Created comprehensive Power BI dashboards presenting portfolio KPIs to board members and investors, enabling data-informed strategic decision-making.</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-card-header">
+                    <h3>Internal Loan System</h3>
+                </div>
+                <div class="project-card-body">
+                    <p>Designed a centralized platform for portfolio monitoring and recovery tracking, streamlining operations and improving data accessibility across departments.</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-card-header">
+                    <h3>Product Data Portal</h3>
+                </div>
+                <div class="project-card-body">
+                    <p>Co-developed a comprehensive data portal that dramatically improved stakeholder data accessibility and facilitated better cross-functional collaboration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements">
+        <h2 class="section-title">Key Achievements</h2>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <div class="achievement-icon">🚀</div>
+                <h3>90%</h3>
+                <p>Reduction in manual reporting workload through automation</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">📊</div>
+                <h3>20%</h3>
+                <p>Increase in dashboard adoption and engagement across departments</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">💡</div>
+                <h3>From Scratch</h3>
+                <p>Established in-house marketing and analytics function</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">⚡</div>
+                <h3>75%</h3>
+                <p>Query response acceleration through MongoDB integration</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background: var(--bg-gray); text-align: center;">
+        <h2 class="section-title">Let's Connect</h2>
+        <p style="max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem; color: var(--text);">
+            I'm always interested in discussing new opportunities, collaborations, or data analytics challenges. Feel free to reach out!
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="mailto:btajay9670@gmail.com" class="btn btn-primary">Send Email</a>
+            <a href="https://www.linkedin.com/in/ajay-babu-7a58a6137/" target="_blank" class="btn btn-outline" style="color: var(--primary); border-color: var(--primary);">LinkedIn Profile</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="mailto:btajay9670@gmail.com" title="Email">✉️</a>
+                <a href="https://www.linkedin.com/in/ajay-babu-7a58a6137/" target="_blank" title="LinkedIn">💼</a>
+                <a href="tel:+918800985719" title="Phone">📱</a>
+            </div>
+            <p style="opacity: 0.8;">© 2025 Ajay Babu. All rights reserved.</p>
+            <p style="opacity: 0.6; font-size: 0.9rem; margin-top: 0.5rem;">Designed & Built with passion for data</p>
+        </div>
+    </footer>
+
+    <script
