@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajay Babu | AM - Data & Business Analyst</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,21 +13,23 @@
         }
         
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1e40af;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
             --secondary: #0f172a;
-            --accent: #06b6d4;
-            --text: #334155;
-            --text-light: #64748b;
+            --accent: #ec4899;
+            --text: #1f2937;
+            --text-light: #6b7280;
             --bg: #ffffff;
-            --bg-gray: #f8fafc;
+            --bg-light: #f9fafb;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
         }
         
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
             color: var(--text);
             overflow-x: hidden;
+            background: var(--bg-light);
         }
         
         /* Header & Navigation */
@@ -52,7 +55,10 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .nav-links {
@@ -65,19 +71,35 @@
             text-decoration: none;
             color: var(--text);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
         }
         
         .nav-links a:hover {
             color: var(--primary);
         }
         
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
         /* Hero Section */
         .hero {
             margin-top: 70px;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: var(--gradient);
             color: white;
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -86,12 +108,30 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.5;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
         }
         
         .hero-content {
@@ -106,11 +146,6 @@
             justify-content: center;
         }
         
-        .hero-text {
-            flex: 1;
-            min-width: 300px;
-        }
-        
         .hero-image {
             flex-shrink: 0;
         }
@@ -120,37 +155,53 @@
             height: 280px;
             border-radius: 50%;
             object-fit: cover;
-            border: 6px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 0.8s ease 0.3s backwards;
+            border: 6px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.8s ease;
         }
         
-        .hero h1 {
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+        
+        .hero-text h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            animation: fadeInUp 0.8s ease;
+            font-weight: 800;
         }
         
-        .hero .subtitle {
+        .hero-text .subtitle {
             font-size: 1.5rem;
-            color: var(--accent);
             margin-bottom: 1rem;
-            animation: fadeInUp 0.8s ease 0.2s backwards;
+            opacity: 0.95;
+            font-weight: 600;
         }
         
-        .hero p {
+        .hero-text p {
             font-size: 1.1rem;
             line-height: 1.8;
             margin-bottom: 2rem;
             opacity: 0.9;
-            animation: fadeInUp 0.8s ease 0.4s backwards;
         }
         
         .hero-buttons {
             display: flex;
             gap: 1rem;
-            justify-content: center;
-            animation: fadeInUp 0.8s ease 0.6s backwards;
+            justify-content: flex-start;
+            flex-wrap: wrap;
         }
         
         .btn {
@@ -166,49 +217,49 @@
         }
         
         .btn-primary {
-            background: var(--primary);
-            color: white;
+            background: white;
+            color: var(--primary);
         }
         
         .btn-primary:hover {
-            background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
         .btn-outline {
-            background: transparent;
+            background: rgba(255,255,255,0.2);
             color: white;
             border: 2px solid white;
         }
         
         .btn-outline:hover {
             background: white;
-            color: var(--secondary);
+            color: var(--primary);
         }
         
-        /* Contact Info Bar */
+        /* Contact Bar */
         .contact-bar {
-            background: var(--bg-gray);
-            padding: 1rem 2rem;
+            background: white;
+            padding: 2rem;
             display: flex;
             justify-content: center;
             gap: 3rem;
             flex-wrap: wrap;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e5e7eb;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             color: var(--text);
         }
         
         .contact-item a {
             text-decoration: none;
             color: var(--text);
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-weight: 500;
         }
         
         .contact-item a:hover {
@@ -216,29 +267,16 @@
         }
         
         .contact-item svg {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             fill: var(--primary);
         }
         
-        .phone-request-btn {
-            background: var(--primary);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .phone-request-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        .contact-item i {
+            width: 24px;
+            height: 24px;
+            color: var(--primary);
+            font-size: 1.2rem;
         }
         
         /* Section Styles */
@@ -254,6 +292,7 @@
             margin-bottom: 3rem;
             color: var(--secondary);
             position: relative;
+            font-weight: 800;
         }
         
         .section-title::after {
@@ -261,12 +300,26 @@
             display: block;
             width: 80px;
             height: 4px;
-            background: var(--primary);
+            background: var(--gradient);
             margin: 1rem auto;
             border-radius: 2px;
         }
         
-        /* Skills Section */
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-light);
+        }
+        
+        .about-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Skills Grid */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -278,16 +331,20 @@
             padding: 2rem;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
+            border-left: 4px solid var(--primary);
         }
         
         .skill-category:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
         }
         
         .skill-category h3 {
-            color: var(--primary);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 1rem;
             font-size: 1.3rem;
         }
@@ -299,89 +356,19 @@
         }
         
         .skill-tag {
-            background: var(--bg-gray);
-            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.9rem;
             color: var(--text);
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            transition: all 0.3s;
         }
         
-        /* Experience Section */
-        .experience-timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-        
-        .experience-timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--primary);
-        }
-        
-        .experience-item {
-            position: relative;
-            margin-bottom: 3rem;
-            padding-left: 2rem;
-        }
-        
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            left: -2.5rem;
-            top: 0;
-            width: 12px;
-            height: 12px;
-            background: var(--primary);
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 3px var(--bg-gray);
-        }
-        
-        .experience-header {
-            margin-bottom: 1rem;
-        }
-        
-        .experience-title {
-            font-size: 1.3rem;
-            color: var(--secondary);
-            font-weight: 600;
-        }
-        
-        .experience-company {
-            color: var(--primary);
-            font-weight: 500;
-            margin-top: 0.25rem;
-        }
-        
-        .experience-date {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-top: 0.25rem;
-        }
-        
-        .experience-item ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .experience-item li {
-            padding-left: 1.5rem;
-            position: relative;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-        
-        .experience-item li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
+        .skill-tag:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
         }
         
         /* Projects Section */
@@ -396,16 +383,17 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
+            border-top: 4px solid var(--primary);
         }
         
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.15);
         }
         
         .project-card-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            background: var(--gradient);
             padding: 2rem;
             color: white;
         }
@@ -420,11 +408,11 @@
         }
         
         .project-card-body p {
-            color: var(--text);
+            color: var(--text-light);
             line-height: 1.7;
         }
         
-        /* Achievements Section */
+        /* Achievements */
         .achievements-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -437,11 +425,24 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
         }
         
         .achievement-card:hover {
             transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
         }
         
         .achievement-icon {
@@ -450,7 +451,10 @@
         }
         
         .achievement-card h3 {
-            color: var(--primary);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-size: 2rem;
             margin-bottom: 0.5rem;
         }
@@ -459,9 +463,28 @@
             color: var(--text-light);
         }
         
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+        }
+        
+        .contact-section p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+        
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
         /* Footer */
         footer {
-            background: var(--secondary);
+            background: linear-gradient(135deg, var(--secondary) 0%, #1e293b 100%);
             color: white;
             text-align: center;
             padding: 3rem 2rem;
@@ -482,37 +505,30 @@
         .social-links a {
             color: white;
             font-size: 1.5rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
         }
         
         .social-links a:hover {
-            color: var(--accent);
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            background: var(--gradient);
+            transform: translateY(-5px);
         }
         
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
+            .hero-text h1 {
                 font-size: 2.5rem;
-            }
-            
-            .hero .subtitle {
-                font-size: 1.2rem;
             }
             
             .hero-content {
                 flex-direction: column-reverse;
+                gap: 2rem;
             }
             
             .hero-image img {
@@ -520,12 +536,16 @@
                 height: 200px;
             }
             
-            .nav-links {
-                display: none;
+            .hero-text {
+                text-align: center;
             }
             
             .hero-buttons {
-                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .nav-links {
+                display: none;
             }
             
             .contact-bar {
@@ -547,8 +567,8 @@
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#achievements">Achievements</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -563,7 +583,7 @@
             <div class="hero-text">
                 <h1>Ajay Babu</h1>
                 <div class="subtitle">AM - Data & Business Analyst</div>
-                <p>Experienced professional with 6+ years of expertise in transforming complex data into actionable insights. Specialized in building scalable analytics solutions, automating workflows, and driving data-informed decision-making across diverse industries.</p>
+                <p>Transforming complex data into strategic business outcomes. 6+ years driving innovation through analytics, automation, and data-driven decision making.</p>
                 <div class="hero-buttons">
                     <a href="#contact" class="btn btn-primary">Get In Touch</a>
                     <a href="#projects" class="btn btn-outline">View Projects</a>
@@ -587,7 +607,7 @@
             <a href="https://www.instagram.com/__ajay.tiwari/" target="_blank">instagram.com/__ajay.tiwari</a>
         </div>
         <div class="contact-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>
+            <i class="fab fa-facebook"></i>
             <a href="https://www.facebook.com/ajaybabutiwari/" target="_blank">facebook.com/ajaybabutiwari</a>
         </div>
     </div>
@@ -595,23 +615,26 @@
     <!-- About Section -->
     <section id="about">
         <h2 class="section-title">About Me</h2>
-        <div style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; line-height: 1.8; color: var(--text);">
-            <p style="margin-bottom: 1.5rem;">
-                I'm a seasoned Data & Business Analyst with over 6 years of proven expertise in leveraging analytics to drive strategic business outcomes. With deep knowledge in Python, SQL, Power BI, and cloud technologies, I specialize in building end-to-end data solutions that transform raw data into meaningful insights.
+        <div class="about-content">
+            <p>
+                I'm a data strategist and business analyst with a passion for turning complex data into actionable insights. With 6+ years of experience working with C-level executives and investors, I specialize in building enterprise-scale analytics solutions that drive measurable business impact.
             </p>
             <p>
-                Throughout my career, I've led cross-functional teams, automated complex workflows, and developed enterprise-grade dashboards that have significantly improved operational efficiency and decision-making processes. I'm passionate about using data to solve real-world business challenges and creating scalable solutions that deliver measurable impact.
+                My expertise spans from designing automated ETL pipelines and real-time dashboards to leading cross-functional teams. I've consistently delivered results: reducing manual reporting by 90%, increasing recovery rates by 30%, and automating processes that handle millions of transactions.
+            </p>
+            <p>
+                Whether working with startups or large corporations across fintech, retail, and agritech sectors, I bring a strategic mindset combined with deep technical expertise to solve business challenges through data.
             </p>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" style="background: var(--bg-gray);">
+    <section id="skills" style="background: var(--bg-light);">
         <h2 class="section-title">Skills & Expertise</h2>
         
         <!-- Technical Skills -->
         <div style="margin-bottom: 4rem;">
-            <h3 style="text-align: center; font-size: 1.8rem; color: var(--secondary); margin-bottom: 2rem;">Technical Skills</h3>
+            <h3 style="text-align: center; font-size: 1.8rem; color: var(--secondary); margin-bottom: 2rem; font-weight: 700;">Technical Skills</h3>
             <div class="skills-grid">
                 <div class="skill-category">
                     <h3>Programming & Databases</h3>
@@ -656,7 +679,7 @@
         
         <!-- Soft Skills -->
         <div>
-            <h3 style="text-align: center; font-size: 1.8rem; color: var(--secondary); margin-bottom: 2rem;">Soft Skills & Leadership</h3>
+            <h3 style="text-align: center; font-size: 1.8rem; color: var(--secondary); margin-bottom: 2rem; font-weight: 700;">Soft Skills & Leadership</h3>
             <div class="skills-grid">
                 <div class="skill-category">
                     <h3>Executive Collaboration</h3>
@@ -694,10 +717,8 @@
         </div>
     </section>
 
-
-
     <!-- Projects Section -->
-    <section id="projects" style="background: var(--bg-gray);">
+    <section id="projects">
         <h2 class="section-title">Key Projects</h2>
         <div class="projects-grid">
             <div class="project-card">
@@ -757,7 +778,7 @@
     </section>
 
     <!-- Achievements Section -->
-    <section id="achievements">
+    <section id="achievements" style="background: var(--bg-light);">
         <h2 class="section-title">Key Achievements</h2>
         <div class="achievements-grid">
             <div class="achievement-card">
@@ -776,37 +797,4 @@
                 <p>Established in-house marketing and analytics function</p>
             </div>
             <div class="achievement-card">
-                <div class="achievement-icon">⚡</div>
-                <h3>75%</h3>
-                <p>Query response acceleration through MongoDB integration</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" style="background: var(--bg-gray); text-align: center;">
-        <h2 class="section-title">Let's Connect</h2>
-        <p style="max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem; color: var(--text);">
-            I'm always interested in discussing new opportunities, collaborations, or data analytics challenges. Feel free to reach out!
-        </p>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="mailto:btajay9670@gmail.com" class="btn btn-primary">Send Email</a>
-            <a href="https://www.linkedin.com/in/ajay-babu-7a58a6137/" target="_blank" class="btn btn-outline" style="color: var(--primary); border-color: var(--primary);">LinkedIn Profile</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="mailto:btajay9670@gmail.com" title="Email">✉️</a>
-                <a href="https://www.linkedin.com/in/ajay-babu-7a58a6137/" target="_blank" title="LinkedIn">💼</a>
-                <a href="https://www.instagram.com/__ajay.tiwari/" target="_blank" title="Instagram">📷</a>
-                <a href="https://www.facebook.com/ajaybabutiwari/" target="_blank" title="Facebook">👤</a>
-            </div>
-            <p style="opacity: 0.8;">© 2025 Ajay Babu. All rights reserved.</p>
-            <p style="opacity: 0.6; font-size: 0.9rem; margin-top: 0.5rem;">Designed & Built with passion for data</p>
-        </div>
-    </footer>
-
-    <script
+                <div
